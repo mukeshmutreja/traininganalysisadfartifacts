@@ -23,6 +23,9 @@
 		"OrganizedDLSConnection_accountKey": {
 			"value": ""
 		},
+		"OrdersBlobStorageConnection_connectionString": {
+			"value": ""
+		},
 		"Adlsgen2_properties_typeProperties_url": {
 			"value": "https://adlsstorageaccountmkm.dfs.core.windows.net"
 		},

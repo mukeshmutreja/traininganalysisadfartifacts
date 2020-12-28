@@ -31,6 +31,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'OrganizedDLSConnection'"
 		},
+		"OrdersBlobStorageConnection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OrdersBlobStorageConnection'"
+		},
 		"Adlsgen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsstorageaccountmkm.dfs.core.windows.net"
@@ -89,6 +93,9 @@
 					},
 					"OrganizedDLSConnection_accountKey": {
 						"value": "[parameters('OrganizedDLSConnection_accountKey')]"
+					},
+					"OrdersBlobStorageConnection_connectionString": {
+						"value": "[parameters('OrdersBlobStorageConnection_connectionString')]"
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
