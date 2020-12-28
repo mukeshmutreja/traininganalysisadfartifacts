@@ -20,6 +20,9 @@
 		"BlobMetaDataSqlConnection_connectionString": {
 			"value": ""
 		},
+		"OrganizedDLSConnection_accountKey": {
+			"value": ""
+		},
 		"Adlsgen2_properties_typeProperties_url": {
 			"value": "https://adlsstorageaccountmkm.dfs.core.windows.net"
 		},
@@ -31,6 +34,9 @@
 		},
 		"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
 			"value": "https://dlstargetprovider20201228164305.azurewebsites.net"
+		},
+		"OrganizedDLSConnection_properties_typeProperties_url": {
+			"value": "https://adlsstorageaccountmkm.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"value": ""

@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BlobMetaDataSqlConnection'"
 		},
+		"OrganizedDLSConnection_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'OrganizedDLSConnection'"
+		},
 		"Adlsgen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsstorageaccountmkm.dfs.core.windows.net"
@@ -42,6 +46,10 @@
 		"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
 			"type": "string",
 			"defaultValue": "https://dlstargetprovider20201228164305.azurewebsites.net"
+		},
+		"OrganizedDLSConnection_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstorageaccountmkm.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -79,6 +87,9 @@
 					"D365Demo_password": {
 						"value": "[parameters('D365Demo_password')]"
 					},
+					"OrganizedDLSConnection_accountKey": {
+						"value": "[parameters('OrganizedDLSConnection_accountKey')]"
+					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
@@ -93,6 +104,9 @@
 					},
 					"mkmkeyvaultconnection_properties_typeProperties_baseUrl": {
 						"value": "[parameters('mkmkeyvaultconnection_properties_typeProperties_baseUrl')]"
+					},
+					"OrganizedDLSConnection_properties_typeProperties_url": {
+						"value": "[parameters('OrganizedDLSConnection_properties_typeProperties_url')]"
 					},
 					"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
 						"value": "[parameters('DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl')]"

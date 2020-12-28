@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BlobMetaDataSqlConnection'"
 		},
+		"OrganizedDLSConnection_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'OrganizedDLSConnection'"
+		},
 		"Adlsgen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsstorageaccountmkm.dfs.core.windows.net"
@@ -42,6 +46,10 @@
 		"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
 			"type": "string",
 			"defaultValue": "https://dlstargetprovider20201228164305.azurewebsites.net"
+		},
+		"OrganizedDLSConnection_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstorageaccountmkm.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -953,6 +961,98 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/mkmkeyvaultconnection')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OrganizedDLSConnection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('OrganizedDLSConnection_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('OrganizedDLSConnection_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OrganizedOrderDLSDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "OrganizedDLSConnection",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"fileSystemName": {
+						"type": "string"
+					},
+					"folder": {
+						"type": "string"
+					},
+					"fileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().fileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().folder",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().fileSystemName",
+							"type": "Expression"
+						}
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "orderid",
+						"type": "INT32"
+					},
+					{
+						"name": "orderdate",
+						"type": "UTF8"
+					},
+					{
+						"name": "customer",
+						"type": "INT32"
+					},
+					{
+						"name": "product",
+						"type": "INT32"
+					},
+					{
+						"name": "units",
+						"type": "INT32"
+					},
+					{
+						"name": "billingaddress",
+						"type": "UTF8"
+					},
+					{
+						"name": "remarks",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/OrganizedDLSConnection')]"
 			]
 		}
 	]
