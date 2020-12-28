@@ -1,0 +1,8 @@
+{
+	"name": "OrderBlobsProcessor",
+	"properties": {
+		"description": "This Pipelie would process incoming internet order blob files",
+		"concurrency": 1,
+		"annotations": []
+	}
+}
