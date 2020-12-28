@@ -66,6 +66,10 @@
 								"headers": {
 									"Content-Type": "application/json",
 									"Accept": "application/json"
+								},
+								"body": {
+									"value": "@concat('{\"blobpath\":\"', item().path, '\", \"blobName\":\"', item().BlobName,'\"}')",
+									"type": "Expression"
 								}
 							},
 							"linkedServiceName": {
