@@ -29,6 +29,9 @@
 		"mkmkeyvaultconnection_properties_typeProperties_baseUrl": {
 			"value": "https://mkmkeyvault.vault.azure.net/"
 		},
+		"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
+			"value": "https://dlstargetprovider20201228164305.azurewebsites.net"
+		},
 		"containerUri": {
 			"value": ""
 		},

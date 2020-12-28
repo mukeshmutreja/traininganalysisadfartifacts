@@ -39,6 +39,10 @@
 			"type": "string",
 			"defaultValue": "https://mkmkeyvault.vault.azure.net/"
 		},
+		"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
+			"type": "string",
+			"defaultValue": "https://dlstargetprovider20201228164305.azurewebsites.net"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -89,6 +93,9 @@
 					},
 					"mkmkeyvaultconnection_properties_typeProperties_baseUrl": {
 						"value": "[parameters('mkmkeyvaultconnection_properties_typeProperties_baseUrl')]"
+					},
+					"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
+						"value": "[parameters('DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl')]"
 					}
 				}
 			},

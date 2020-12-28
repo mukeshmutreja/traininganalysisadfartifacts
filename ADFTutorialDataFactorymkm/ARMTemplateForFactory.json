@@ -38,6 +38,10 @@
 		"mkmkeyvaultconnection_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://mkmkeyvault.vault.azure.net/"
+		},
+		"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
+			"type": "string",
+			"defaultValue": "https://dlstargetprovider20201228164305.azurewebsites.net"
 		}
 	},
 	"variables": {
@@ -867,13 +871,88 @@
 							},
 							"firstRowOnly": false
 						}
+					},
+					{
+						"name": "Iterate processable blobs",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Load processable blobs",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Load processable blobs').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "DLSTargetProvider",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "DLSTargetProvider",
+										"method": "POST",
+										"headers": {
+											"Content-Type": "application/json",
+											"Accept": "application/json"
+										},
+										"body": {
+											"value": "@concat('{\"blobpath\":\"', item().path, '\", \"blobName\":\"', item().BlobName,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "DLSTargetProviderFuntionConnection",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
 					}
 				],
 				"concurrency": 1,
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/BlobMetadataDataset')]"
+				"[concat(variables('factoryId'), '/datasets/BlobMetadataDataset')]",
+				"[concat(variables('factoryId'), '/linkedServices/DLSTargetProviderFuntionConnection')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DLSTargetProviderFuntionConnection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFunction",
+				"typeProperties": {
+					"functionAppUrl": "[parameters('DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl')]",
+					"functionKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "mkmkeyvaultconnection",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "functionkeyDLSTargetProvider"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/mkmkeyvaultconnection')]"
 			]
 		}
 	]
