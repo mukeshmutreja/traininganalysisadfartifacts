@@ -1,0 +1,35 @@
+{
+	"name": "MoviesDB",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesDB"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MoviesSink",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesRatingSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "YearFilter"
+				},
+				{
+					"name": "AgreegateRating"
+				}
+			],
+			"script": "source(output(\n\t\t{Movie Id} as string,\n\t\tTitle as string,\n\t\tYear as string,\n\t\tGenres as string,\n\t\tRating as string,\n\t\t{Rotton Tomato} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> MoviesDB\nMoviesDB filter(toInteger(Year) >= 1910 && toInteger(Year) <= 2000) ~> YearFilter\nYearFilter aggregate(groupBy(Year),\n\tRating = avg(toInteger(Rating))) ~> AgreegateRating\nAgreegateRating sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> MoviesRatingSink"
+		}
+	}
+}

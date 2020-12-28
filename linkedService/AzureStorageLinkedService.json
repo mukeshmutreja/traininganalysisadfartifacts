@@ -1,0 +1,12 @@
+{
+	"name": "AzureStorageLinkedService",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=mkmtorageaccount;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFERlRVVE9SSUFMREFUQUZBQ1RPUllNS01fN2MzMjRhY2ItNDc1YS00MzM3LWI4NmYtZWJkMDcyNDI5ODhlIg0KfQ=="
+		}
+	}
+}

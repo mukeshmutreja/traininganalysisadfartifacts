@@ -1,0 +1,36 @@
+{
+	"name": "source-adls",
+	"properties": {
+		"description": "Import data from Fixed length",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "fixedlengthfileadls2",
+						"type": "DatasetReference"
+					},
+					"name": "sourceadls"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Fixedlengthcolumn",
+						"type": "DatasetReference"
+					},
+					"name": "savefile"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Dffixedlength"
+				},
+				{
+					"name": "Removetheadditonalcolumns"
+				}
+			],
+			"script": "source(output(\n\t\tColumn_1 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> sourceadls\nsourceadls derive({Col-1} = substring(Column_1,1,4),\n\t\t{col-2} = substring(Column_1,5,4),\n\t\t{col-3} = substring(Column_1,9,4),\n\t\t{col-4} = substring(Column_1,13,4)) ~> Dffixedlength\nDffixedlength select(mapColumn(\n\t\t{Col-1},\n\t\t{col-2},\n\t\t{col-3},\n\t\t{col-4}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Removetheadditonalcolumns\nRemovetheadditonalcolumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> savefile"
+		}
+	}
+}

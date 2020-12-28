@@ -1,0 +1,15 @@
+{
+	"name": "D365Demo",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Dynamics",
+		"typeProperties": {
+			"deploymentType": "Online",
+			"serviceUri": "https://mcoifodemob23a6bda43df7c51aos.cloudax.dynamics.com/",
+			"authenticationType": "Office365",
+			"username": "mukumarm@microsoft.com",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFERlRVVE9SSUFMREFUQUZBQ1RPUllNS01fMDMzNDlmZGYtMDNlNS00ZmQ2LTk4MDEtMzdkYmE3MDc5NWUwIg0KfQ=="
+		}
+	}
+}
