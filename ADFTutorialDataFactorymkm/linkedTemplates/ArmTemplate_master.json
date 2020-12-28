@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'D365Demo'"
 		},
+		"BlobMetaDataSqlConnection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BlobMetaDataSqlConnection'"
+		},
 		"Adlsgen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsstorageaccountmkm.dfs.core.windows.net"
@@ -65,14 +69,17 @@
 					"Adlsgen2_accountKey": {
 						"value": "[parameters('Adlsgen2_accountKey')]"
 					},
-					"AzureSqlDatabase1_connectionString": {
-						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
-					},
 					"AzureStorageLinkedService_connectionString": {
 						"value": "[parameters('AzureStorageLinkedService_connectionString')]"
 					},
 					"D365Demo_password": {
 						"value": "[parameters('D365Demo_password')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"BlobMetaDataSqlConnection_connectionString": {
+						"value": "[parameters('BlobMetaDataSqlConnection_connectionString')]"
 					},
 					"Adlsgen2_properties_typeProperties_url": {
 						"value": "[parameters('Adlsgen2_properties_typeProperties_url')]"
@@ -86,6 +93,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "ADFTutorialDataFactorymkm_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADFTutorialDataFactorymkm_ArmTemplate_0')]"
+			]
 		}
 	]
 }

@@ -17,6 +17,9 @@
 		"D365Demo_password": {
 			"value": ""
 		},
+		"BlobMetaDataSqlConnection_connectionString": {
+			"value": ""
+		},
 		"Adlsgen2_properties_typeProperties_url": {
 			"value": "https://adlsstorageaccountmkm.dfs.core.windows.net"
 		},
