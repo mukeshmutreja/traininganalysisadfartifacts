@@ -1,0 +1,19 @@
+{
+	"name": "BlobMetaDataSqlConnection",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adfsqlservermkm.database.windows.net;Initial Catalog=Adfsqlservermkm;User ID=mukeshmutreja",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "mkmkeyvaultconnection",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sqlpassword"
+			}
+		}
+	}
+}
