@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADFTutorialDataFactorymkm"
+		},
+		"Adlsgen2_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureStorageLinkedService_connectionString": {
+			"value": ""
+		},
+		"D365Demo_password": {
+			"value": ""
+		},
+		"Adlsgen2_properties_typeProperties_url": {
+			"value": "https://adlsstorageaccountmkm.dfs.core.windows.net"
+		},
+		"D365Demo_properties_typeProperties_username": {
+			"value": "mukumarm@microsoft.com"
+		},
+		"mkmkeyvaultconnection_properties_typeProperties_baseUrl": {
+			"value": "https://mkmkeyvault.vault.azure.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
