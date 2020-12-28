@@ -250,6 +250,49 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "updateBlobMetaData",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "CopyBlobStorageDataset",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[uspUpdateMetaData]",
+								"storedProcedureParameters": {
+									"dlslocation": {
+										"value": {
+											"value": "@concat(activity('DLSTargetProvider').output.targetOrgnznizedFullPath,'/',activity('DLSTargetProvider').output.targetOrgznizedFileName)",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"recordid": {
+										"value": {
+											"value": "@item().RecordId",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "BlobMetaDataSqlConnection",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
