@@ -68,7 +68,7 @@
 									"Accept": "application/json"
 								},
 								"body": {
-									"value": "@item()",
+									"value": "@concat('{\"blobpath\":\"', item().path, '\", \"blobName\":\"', item().BlobName,'\"}')",
 									"type": "Expression"
 								}
 							},
