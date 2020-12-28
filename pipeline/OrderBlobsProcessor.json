@@ -108,7 +108,110 @@
 										"type": "DelimitedTextReadSettings"
 									}
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "orderid",
+												"type": "Int32",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "orderid",
+												"type": "String",
+												"physicalType": "UTF8"
+											}
+										},
+										{
+											"source": {
+												"name": "orderdate",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "orderdate",
+												"type": "String",
+												"physicalType": "UTF8"
+											}
+										},
+										{
+											"source": {
+												"name": "customer",
+												"type": "Int32",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "customer",
+												"type": "String",
+												"physicalType": "UTF8"
+											}
+										},
+										{
+											"source": {
+												"name": "product",
+												"type": "Int32",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "product",
+												"type": "String",
+												"physicalType": "UTF8"
+											}
+										},
+										{
+											"source": {
+												"name": "units",
+												"type": "Int32",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "units",
+												"type": "String",
+												"physicalType": "UTF8"
+											}
+										},
+										{
+											"source": {
+												"name": "billingaddress",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "billingaddress",
+												"type": "String",
+												"physicalType": "UTF8"
+											}
+										},
+										{
+											"source": {
+												"name": "remarks",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "remarks",
+												"type": "String",
+												"physicalType": "UTF8"
+											}
+										}
+									],
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
@@ -125,6 +228,23 @@
 										},
 										"Filename": {
 											"value": "@activity('DLSTargetProvider').output.blobName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "OrganizedOrderDLSDataset",
+									"type": "DatasetReference",
+									"parameters": {
+										"fileSystemName": "organized-data",
+										"folder": {
+											"value": "@activity('DLSTargetProvider').output.targetOrganizedFullPath",
+											"type": "Expression"
+										},
+										"fileName": {
+											"value": "@activity('DLSTargetProvider').output.targetOrganizedFileName",
 											"type": "Expression"
 										}
 									}
