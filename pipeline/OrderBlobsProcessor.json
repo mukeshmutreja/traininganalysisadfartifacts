@@ -49,7 +49,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "DLSTargetProvider",
+							"name": "Prepare DLS Target information",
 							"type": "AzureFunctionActivity",
 							"dependsOn": [],
 							"policy": {
@@ -82,7 +82,7 @@
 							"type": "Copy",
 							"dependsOn": [
 								{
-									"activity": "DLSTargetProvider",
+									"activity": "Prepare DLS Target information",
 									"dependencyConditions": [
 										"Succeeded"
 									]
