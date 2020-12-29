@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BlobMetaDataSqlConnection'"
 		},
+		"DLSTargetProviderFuntionConnection_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'DLSTargetProviderFuntionConnection'"
+		},
 		"OrganizedDLSConnection_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'OrganizedDLSConnection'"
@@ -91,6 +95,9 @@
 					"D365Demo_password": {
 						"value": "[parameters('D365Demo_password')]"
 					},
+					"DLSTargetProviderFuntionConnection_functionKey": {
+						"value": "[parameters('DLSTargetProviderFuntionConnection_functionKey')]"
+					},
 					"OrganizedDLSConnection_accountKey": {
 						"value": "[parameters('OrganizedDLSConnection_accountKey')]"
 					},
@@ -112,11 +119,11 @@
 					"mkmkeyvaultconnection_properties_typeProperties_baseUrl": {
 						"value": "[parameters('mkmkeyvaultconnection_properties_typeProperties_baseUrl')]"
 					},
-					"OrganizedDLSConnection_properties_typeProperties_url": {
-						"value": "[parameters('OrganizedDLSConnection_properties_typeProperties_url')]"
-					},
 					"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
 						"value": "[parameters('DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl')]"
+					},
+					"OrganizedDLSConnection_properties_typeProperties_url": {
+						"value": "[parameters('OrganizedDLSConnection_properties_typeProperties_url')]"
 					}
 				}
 			},

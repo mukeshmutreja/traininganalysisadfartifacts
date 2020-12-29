@@ -20,6 +20,9 @@
 		"BlobMetaDataSqlConnection_connectionString": {
 			"value": ""
 		},
+		"DLSTargetProviderFuntionConnection_functionKey": {
+			"value": ""
+		},
 		"OrganizedDLSConnection_accountKey": {
 			"value": ""
 		},

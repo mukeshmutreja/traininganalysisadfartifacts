@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BlobMetaDataSqlConnection'"
 		},
+		"DLSTargetProviderFuntionConnection_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'DLSTargetProviderFuntionConnection'"
+		},
 		"OrganizedDLSConnection_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'OrganizedDLSConnection'"
@@ -1174,18 +1178,12 @@
 				"typeProperties": {
 					"functionAppUrl": "[parameters('DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl')]",
 					"functionKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "mkmkeyvaultconnection",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "functionkeyDLSTargetProvider"
+						"type": "SecureString",
+						"value": "[parameters('DLSTargetProviderFuntionConnection_functionKey')]"
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/mkmkeyvaultconnection')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/OrganizedDLSConnection')]",

@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'D365Demo'"
 		},
+		"DLSTargetProviderFuntionConnection_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'DLSTargetProviderFuntionConnection'"
+		},
 		"OrganizedDLSConnection_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'OrganizedDLSConnection'"
@@ -47,13 +51,13 @@
 			"type": "string",
 			"defaultValue": "https://mkmkeyvault.vault.azure.net/"
 		},
-		"OrganizedDLSConnection_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsstorageaccountmkm.dfs.core.windows.net"
-		},
 		"DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl": {
 			"type": "string",
 			"defaultValue": "https://dlstargetprovider20201228164305.azurewebsites.net"
+		},
+		"OrganizedDLSConnection_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstorageaccountmkm.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -119,6 +123,23 @@
 				"type": "AzureKeyVault",
 				"typeProperties": {
 					"baseUrl": "[parameters('mkmkeyvaultconnection_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DLSTargetProviderFuntionConnection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFunction",
+				"typeProperties": {
+					"functionAppUrl": "[parameters('DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl')]",
+					"functionKey": {
+						"type": "SecureString",
+						"value": "[parameters('DLSTargetProviderFuntionConnection_functionKey')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -443,29 +464,6 @@
 							"type": "LinkedServiceReference"
 						},
 						"secretName": "sqlpassword"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/mkmkeyvaultconnection')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DLSTargetProviderFuntionConnection')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureFunction",
-				"typeProperties": {
-					"functionAppUrl": "[parameters('DLSTargetProviderFuntionConnection_properties_typeProperties_functionAppUrl')]",
-					"functionKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "mkmkeyvaultconnection",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "functionkeyDLSTargetProvider"
 					}
 				}
 			},
